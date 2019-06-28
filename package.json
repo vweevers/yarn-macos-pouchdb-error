@@ -10,8 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
-    "express-pouchdb": "^4.1.0",
     "pouchdb": "^7.1.1"
   }
 }

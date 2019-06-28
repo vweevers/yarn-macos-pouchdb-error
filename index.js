@@ -1,7 +1,12 @@
 var PouchDB = require('pouchdb');
-var express = require('express');
-var app = express();
+var db = new PouchDB('dbname');
 
-app.use('/db', require('express-pouchdb')(PouchDB));
+db.put({
+  _id: 'dave@gmail.com',
+  name: 'David',
+  age: 69
+});
 
-app.listen(3200);
+db.changes().on('change', function() {
+  console.log('Ch-Ch-Changes');
+});
