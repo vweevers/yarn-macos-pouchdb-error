@@ -1,6 +1,7 @@
 {
   "name": "test",
   "version": "1.0.0",
+  "private": true,
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,6 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "pouchdb": "^7.1.1"
+    "level": "5.0.1",
+    "leveldown": "5.0.2"
+  },
+  "devDependencies": {
+    "tempy": "^0.3.0"
   }
 }
