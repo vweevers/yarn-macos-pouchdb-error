@@ -1,17 +1,21 @@
 'use strict'
 
-// Comment out this line to prevent the bug
-const level = require('level')
+function test (binding, location) {
+  const context = binding.db_init()
+  const options = { createIfMissing: true, errorIfExists: false }
 
-const leveldown = require('leveldown')
-const tempy = require('tempy')
-const db = leveldown(tempy.directory())
+  return function open () {
+    let calls = 0
+    binding.db_open(context, location, options, function (err) {
+      if (calls++) throw new Error('Called too many times')
+      if (err) throw err
 
-let calls = 0
+      console.log('OK')
+    })
+  }
+}
 
-db.open(function (err) {
-  if (calls++) throw new Error('Called too many times')
-  if (err) throw err
+const ld_5_3_0 = require('./leveldown-5.3.0/prebuilds/darwin-x64/node.napi.node')
+const ld_5_0_2 = require('./leveldown-5.0.2/prebuilds/darwin-x64/node-napi.node')
 
-  console.log('OK')
-})
+test(ld_5_0_2, 'test-db')()

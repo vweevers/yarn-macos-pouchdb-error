@@ -11,10 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "level": "5.0.1",
-    "leveldown": "5.0.2"
   },
   "devDependencies": {
-    "tempy": "^0.3.0"
   }
 }
