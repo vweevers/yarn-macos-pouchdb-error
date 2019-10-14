@@ -1,21 +1,49 @@
 'use strict'
 
-function test (binding, location) {
-  const context = binding.db_init()
-  const options = { createIfMissing: true, errorIfExists: false }
+const fs = require('fs')
+const platform = require('os').platform()
+const av = process.argv[2]
+const bv = process.argv[3]
 
-  return function open () {
-    let calls = 0
-    binding.db_open(context, location, options, function (err) {
-      if (calls++) throw new Error('Called too many times')
-      if (err) throw err
+if (av && bv) {
+  const a = load(av)
+  const b = load(bv, av === bv)
 
-      console.log('OK')
-    })
-  }
+  open(b, bv)
+} else if (av) {
+  open(load(av), av)
+} else {
+  console.error('usage: node index.js <version a> [version b]')
+  process.exit(1)
 }
 
-const ld_5_3_0 = require('./leveldown-5.3.0/prebuilds/darwin-x64/node.napi.node')
-const ld_5_0_2 = require('./leveldown-5.0.2/prebuilds/darwin-x64/node-napi.node')
+function load (version, copy) {
+  let fp = `./leveldown/${version}/prebuilds/${platform}-x64/node.napi.node`
 
-test(ld_5_0_2, 'test-db')()
+  if (copy) {
+    const src = fp
+    const dest = fp = fp.replace('node.napi', 'node.napi.copy')
+    fs.copyFileSync(src, dest)
+  }
+
+  console.log('Load %s', fp)
+  return require(fp)
+}
+
+function open (binding, version) {
+  console.log('Open %s', version)
+
+  const context = binding.db_init()
+  const location = 'db/' + Date.now()
+  const options = { createIfMissing: true, errorIfExists: false }
+
+  let calls = 0
+  binding.db_open(context, location, options, function (err) {
+    if (calls++) throw new Error('Called too many times')
+    if (err) throw err
+
+    setTimeout(function () {
+      console.log('\nOK')
+    }, 1e3)
+  })
+}
