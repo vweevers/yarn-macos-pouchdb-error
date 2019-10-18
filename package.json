@@ -11,13 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ld500": "npm:leveldown@5.0.0",
     "ld502": "npm:leveldown@5.0.2",
-    "ld503": "npm:leveldown@5.0.3",
-    "ld510": "npm:leveldown@5.1.0",
-    "ld511": "npm:leveldown@5.1.1",
-    "ld520": "npm:leveldown@5.2.0",
-    "ld530": "npm:leveldown@5.3.0"
+    "ld530": "npm:leveldown@5.3.0",
+    "ldnext": "github:Level/leveldown#add-namespace"
   },
   "devDependencies": {}
 }

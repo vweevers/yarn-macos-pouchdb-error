@@ -18,8 +18,8 @@ if (av && bv) {
 }
 
 function load (version, copy) {
-  const nr = version.replace(/[^\d]/g, '')
-  const id = `ld${nr}/build/Debug/leveldown.node`
+  const nr = version.replace(/[^\w]/g, '')
+  const id = `ld${nr}/build/Release/leveldown.node`
   const src = require.resolve(id)
   const dest = src.replace(/leveldown\.node$/, `ld${nr}.${copy ? 'b.' : ''}node`)
 

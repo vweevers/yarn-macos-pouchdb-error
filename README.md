@@ -10,11 +10,17 @@ To install:
 
 ```
 git checkout low-level
-npm install --build-from-source --debug
+npm install --build-from-source
 ```
 
 Then run:
 
 ```
 node index.js 5.3.0 5.0.2
+```
+
+Or to test the fix:
+
+```
+node index.js next 5.0.2
 ```
