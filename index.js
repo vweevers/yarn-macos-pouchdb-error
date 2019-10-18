@@ -18,17 +18,14 @@ if (av && bv) {
 }
 
 function load (version, copy) {
-  const id = `ld${version.replace(/[^\d]/g, '')}/build/Debug/leveldown.node`
-  let fp = require.resolve(id)
+  const nr = version.replace(/[^\d]/g, '')
+  const id = `ld${nr}/build/Debug/leveldown.node`
+  const src = require.resolve(id)
+  const dest = src.replace(/leveldown\.node$/, `ld${nr}.${copy ? 'b.' : ''}node`)
 
-  if (copy) {
-    const src = fp
-    const dest = fp = fp.replace(/\.node$/, '.copy.node')
-    fs.copyFileSync(src, dest)
-  }
-
-  console.log('Load %s', fp)
-  return require(fp)
+  fs.copyFileSync(src, dest)
+  console.log('Load %s', dest)
+  return require(dest)
 }
 
 function open (binding, version) {
