@@ -5,4 +5,3 @@ pouch__all_dbs__
 log.txt
 dbname
 test-db
-leveldown/**/node.napi.copy.node

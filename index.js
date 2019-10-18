@@ -18,11 +18,12 @@ if (av && bv) {
 }
 
 function load (version, copy) {
-  let fp = `./leveldown/${version}/prebuilds/${platform}-x64/node.napi.node`
+  const id = `ld${version.replace(/[^\d]/g, '')}/build/Debug/leveldown.node`
+  let fp = require.resolve(id)
 
   if (copy) {
     const src = fp
-    const dest = fp = fp.replace('node.napi', 'node.napi.copy')
+    const dest = fp = fp.replace(/\.node$/, '.copy.node')
     fs.copyFileSync(src, dest)
   }
 
