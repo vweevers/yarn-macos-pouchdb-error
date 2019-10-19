@@ -13,7 +13,9 @@
   "dependencies": {
     "ld502": "npm:leveldown@5.0.2",
     "ld530": "npm:leveldown@5.3.0",
-    "ldnext": "github:Level/leveldown#add-namespace"
+    "ldhidden": "github:Level/leveldown#hide-symbols-for-mac",
+    "ldmaster": "github:Level/leveldown",
+    "ldns": "github:Level/leveldown#add-namespace"
   },
   "devDependencies": {}
 }

@@ -19,8 +19,9 @@ Then run:
 node index.js 5.3.0 5.0.2
 ```
 
-Or to test the fix:
+Or to test the fix ([Level/leveldown#687](https://github.com/Level/leveldown/pull/687)) or [`-fvisibility=hidden`](https://github.com/Level/leveldown/commit/0969552a9d44e929e93baab1fb938500b89871d0):
 
 ```
-node index.js next 5.0.2
+node index.js ns 5.0.2
+node index.js hidden 5.0.2
 ```
