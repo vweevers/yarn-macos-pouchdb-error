@@ -9,7 +9,7 @@ Requires npm >= 6.9, because this uses [package aliases](https://github.com/npm/
 To install:
 
 ```
-git checkout low-level
+git checkout dlopen-test
 npm install --build-from-source
 ```
 

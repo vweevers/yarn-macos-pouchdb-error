@@ -1,7 +1,8 @@
 'use strict'
 
 const fs = require('fs')
-const platform = require('os').platform()
+const tmp = require('os').tmpdir()
+const path = require('path')
 const av = process.argv[2]
 const bv = process.argv[3]
 
@@ -22,10 +23,17 @@ function load (version, copy) {
   const id = `ld${nr}/build/Release/leveldown.node`
   const src = require.resolve(id)
   const dest = src.replace(/leveldown\.node$/, `ld${nr}.${copy ? 'b.' : ''}node`)
+  const wrapped = path.join(tmp, `leveldown${nr}-${Date.now()}.js`)
 
   fs.copyFileSync(src, dest)
-  console.log('Load %s', dest)
-  return require(dest)
+  console.log('Load %s (%s)', version, dest)
+
+  fs.writeFileSync(wrapped, `
+    const constants = require('os').constants.dlopen
+    process.dlopen(module, ${JSON.stringify(dest)}, constants.RTLD_LOCAL | constants.RTLD_NOW)
+  `)
+
+  return require(wrapped)
 }
 
 function open (binding, version) {
